@@ -36,7 +36,7 @@ export default class Bemoon {
   }
 
   get className(): string {
-    return `${this.block}${this.elem}${this.modifierS}`
+    return `${this.block}${this.elem}${this.mod}`
   }
 
   private get elem() {
@@ -44,7 +44,7 @@ export default class Bemoon {
     return `${this.option.elSeparetor}${this._elem}`
   }
 
-  private get modifierS() {
+  private get mod() {
     if (this._modifier === '') return ''
     return `${this.option.modSeparetor}${this._modifier}`
   }
@@ -57,15 +57,28 @@ export default class Bemoon {
     return document.querySelector(this.query)
   }
 
-  mod(newMod: string): string {
+  getDOMAll(): HTMLCollectionOf<Element> {
+    return document.getElementsByClassName(this.className)
+  }
+
+  modify(newMod: string): string {
     this._modifier = newMod;
     return this.className
   }
 
-  modElement(newMod: string): void {
+  modElement(newMod: string) {
     const el = this.getDOM()
     if (!el) return
+    this.modify(newMod)
     el.className = this.className
+  }
+
+  modElementAll(newMod: string): void {
+    const elCollection = this.getDOMAll()
+    this.modify(newMod)
+    Array.prototype.forEach.call(elCollection, (el: Element) => {
+      el.className = this.className
+    });
   }
 
   clear(): string {

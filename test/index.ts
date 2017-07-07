@@ -15,7 +15,7 @@ test((t) => {
 test((t) => {
   const bem = new Bemoon('block', 'element')
   t.is(bem.query, '.block__element')
-  bem.mod('active')
+  bem.modify('active')
   t.is(bem.query, '.block__element--active')
 })
 
@@ -28,6 +28,6 @@ test((t) => {
 
 test((t) => {
   const bem = new Bemoon('block', 'element')
-  t.is(bem.mod('active'), 'block__element--active')
-  t.is(bem.mod('inactive'), 'block__element--inactive')
+  t.is(bem.modify('active'), 'block__element--active')
+  t.is(bem.modify('inactive'), 'block__element--inactive')
 })
