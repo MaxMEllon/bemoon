@@ -1,0 +1,14 @@
+{
+  "name": "bemoon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "ssh://git@github.com/MaxMEllon/bemoon.git",
+  "author": "MaxMEllon <maxmellon1994@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --outDir dist/ src/index.ts "
+  },
+  "dependencies": {
+    "typescript": "^2.4.1"
+  }
+}
