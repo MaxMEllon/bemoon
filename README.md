@@ -18,6 +18,9 @@ b.modElement('active')
 
 b.modElement('inactive')
 // <div class="block__element--inactive" />
+
+b.clearElement()
+// <div class="block__element" />
 ```
 
 ## LICENSE

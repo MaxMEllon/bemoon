@@ -66,23 +66,31 @@ export default class Bemoon {
     return this.className
   }
 
-  modElement(newMod: string) {
+  clear(): string {
+    this._modifier = '';
+    return this.className
+  }
+
+  modElement(newMod: string): void {
     const el = this.getDOM()
-    if (!el) return
     this.modify(newMod)
+    if (!el) throw new Error(`${this.query} is not found.`)
     el.className = this.className
   }
 
   modElementAll(newMod: string): void {
     const elCollection = this.getDOMAll()
+    if (elCollection.length === 0) throw new Error(`${this.query} is not found.`)
     this.modify(newMod)
     Array.prototype.forEach.call(elCollection, (el: Element) => {
       el.className = this.className
     });
   }
 
-  clear(): string {
-    this._modifier = '';
-    return this.className
+  modClear(): void {
+    const el = this.getDOM()
+    if (!el) throw new Error(`${this.query} is not found.`)
+    this.clear()
+    el.className = this.className
   }
 }
