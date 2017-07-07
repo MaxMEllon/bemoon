@@ -1,0 +1,32 @@
+{
+  "extends": ["tslint:recommended", "tslint-react"],
+  "rules": {
+    "space-before-function-paren": [
+      true,
+      "never"
+    ],
+    "curly": [
+      true,
+      "ignore-same-line"
+    ],
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "semicolon":[
+      true,
+      "never"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double"
+    ],
+    "jsx-no-multiline-js": false,
+    "jsx-no-lambda": false,
+    "variable-name": [
+      true,
+      "allow-leading-underscore"
+    ]
+  }
+}

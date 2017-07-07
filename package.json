@@ -6,9 +6,12 @@
   "author": "MaxMEllon <maxmellon1994@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --outDir dist/ src/index.ts "
+    "build": "tsc --outDir dist/ src/index.ts",
+    "test": "tsc --target es2015 --module commonjs test/index.ts && ava test/*.js",
+    "posttest": "rm -rf src/*.js test/*.js"
   },
-  "dependencies": {
+  "devDependencies": {
+    "ava": "^0.20.0",
     "typescript": "^2.4.1"
   }
 }

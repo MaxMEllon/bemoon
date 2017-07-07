@@ -1,0 +1,75 @@
+type IOption =  {
+  elSeparetor: string;
+  modSeparetor: string;
+}
+
+export default class Bemoon {
+  private _block: string;
+  private _elem: string;
+  private _modifier: string;
+  private option: IOption;
+
+  constructor(block: string, element: string, modifier: string = '') {
+    this._block = block
+    this._elem = element
+    this._modifier = modifier
+    this.option = {
+      elSeparetor: '__',
+      modSeparetor: '--',
+    }
+  }
+
+  get block() {
+    return this._block
+  }
+
+  get element() {
+    return this._elem
+  }
+
+  get modifier() {
+    return this._modifier
+  }
+
+  get query(): string {
+    return `.${this.className}`
+  }
+
+  get className(): string {
+    return `${this.block}${this.elem}${this.modifierS}`
+  }
+
+  private get elem() {
+    if (this._elem === '') return ''
+    return `${this.option.elSeparetor}${this._elem}`
+  }
+
+  private get modifierS() {
+    if (this._modifier === '') return ''
+    return `${this.option.modSeparetor}${this._modifier}`
+  }
+
+  config(opt: IOption): void {
+    this.option = opt
+  }
+
+  getDOM(): Element | null {
+    return document.querySelector(this.query)
+  }
+
+  mod(newMod: string): string {
+    this._modifier = newMod;
+    return this.className
+  }
+
+  modElement(newMod: string): void {
+    const el = this.getDOM()
+    if (!el) return
+    el.className = this.className
+  }
+
+  clear(): string {
+    this._modifier = '';
+    return this.className
+  }
+}
