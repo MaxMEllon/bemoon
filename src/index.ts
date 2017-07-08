@@ -1,6 +1,8 @@
 type IOption =  {
-  elSeparetor: string;
-  modSeparetor: string;
+  prefix: string
+  prefixSeparetor: string
+  elementSeparetor: string
+  modifierSeparetor: string
 }
 
 export default class Bemoon {
@@ -14,9 +16,15 @@ export default class Bemoon {
     this._elem = element
     this._modifier = modifier
     this.option = {
-      elSeparetor: '__',
-      modSeparetor: '--',
+      prefix: '',
+      prefixSeparetor: '-',
+      elementSeparetor: '__',
+      modifierSeparetor: '--',
     }
+  }
+
+  get prefix() {
+    return this.option.prefix
   }
 
   get block() {
@@ -36,17 +44,32 @@ export default class Bemoon {
   }
 
   get className(): string {
-    return `${this.block}${this.elem}${this.mod}`
+    return `${this.pref}${this.block}${this.elem}${this.mod}`
   }
 
-  private get elem() {
+  private get pref(): string {
+    if (this.option.prefix === '') return ''
+    return `${this.option.prefix}${this.option.prefixSeparetor}`
+  }
+
+  private get elem(): string {
     if (this._elem === '') return ''
-    return `${this.option.elSeparetor}${this._elem}`
+    return `${this.option.elementSeparetor}${this._elem}`
   }
 
-  private get mod() {
+  private get mod(): string {
     if (this._modifier === '') return ''
-    return `${this.option.modSeparetor}${this._modifier}`
+    return `${this.option.modifierSeparetor}${this._modifier}`
+  }
+
+  private _modify(newMod: string): string {
+    this._modifier = newMod;
+    return this.className
+  }
+
+  private _clear(): string {
+    this._modifier = '';
+    return this.className
   }
 
   config(opt: IOption): void {
@@ -61,24 +84,14 @@ export default class Bemoon {
     return document.getElementsByClassName(this.className)
   }
 
-  modify(newMod: string): string {
-    this._modifier = newMod;
-    return this.className
-  }
-
-  clear(): string {
-    this._modifier = '';
-    return this.className
-  }
-
-  modElement(newMod: string): void {
+  modify(newMod: string): void {
     const el = this.getDOM()
-    this.modify(newMod)
+    this._modify(newMod)
     if (!el) throw new Error(`${this.query} is not found.`)
     el.className = this.className
   }
 
-  modElementAll(newMod: string): void {
+  modifyAll(newMod: string): void {
     const elCollection = this.getDOMAll()
     if (elCollection.length === 0) throw new Error(`${this.query} is not found.`)
     this.modify(newMod)
@@ -87,10 +100,10 @@ export default class Bemoon {
     });
   }
 
-  modClear(): void {
+  clear(): void {
     const el = this.getDOM()
     if (!el) throw new Error(`${this.query} is not found.`)
-    this.clear()
+    this._clear()
     el.className = this.className
   }
 }

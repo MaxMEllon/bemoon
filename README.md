@@ -13,13 +13,13 @@ const b = new Bemoon('block', 'element')
 b.getDOM()
 // <div class="block__element" />
 
-b.modElement('active')
+b.modify('active')
 // <div class="block__element--active" />
 
-b.modElement('inactive')
+b.modifyAll('inactive')
 // <div class="block__element--inactive" />
 
-b.clearElement()
+b.clear()
 // <div class="block__element" />
 ```
 
